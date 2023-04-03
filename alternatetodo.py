@@ -1,6 +1,7 @@
 import functions
 import time
 name = time.strftime("%B %d, %Y %H:%M:%S")
+print("(The time is printed using time.strftime() function)")
 print("It is", name)
 while True:
     user_action = input("Type \n 1.Add 2.Show 3.Edit 4.Complete 5.Exit \n")
