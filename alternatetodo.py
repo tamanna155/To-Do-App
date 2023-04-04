@@ -28,7 +28,7 @@ while True:
             todo = functions.get_todos()
             print("the old list is: ", todo)
             num = edit - 1
-            todo[num] = new
+            todo[num] = new + "\n"
             functions.write_todos("todos.txt", todo)
             print("the new list is: ", todo)
         except ValueError:
@@ -39,6 +39,7 @@ while True:
         try:
             todo = functions.get_todos()
             num = complete - 1
+            element = todo[num].strip("\n")
             todo.pop(num)
             functions.write_todos("todos.txt", todo)
         except IndexError:
