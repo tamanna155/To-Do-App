@@ -6,7 +6,8 @@ input_box = sg.InputText(tooltip="Enter a todo", key="todo")
 add_button = sg.Button("Add")
 list_box = sg.Listbox(values=functions.get_todos(), key="items", enable_events=True, size=[45,10])
 edit_button = sg.Button("Edit")
-window = sg.Window('My To-Do App', layout=[[label], [input_box, add_button], [list_box, edit_button]], font=('Kanit, sans-serif', 16))
+complete_button = sg.Button("Complete")
+window = sg.Window('My To-Do App', layout=[[label], [input_box, add_button], [list_box, edit_button, complete_button]], font=('Kanit, sans-serif', 16))
 while True:
     event, value = window.read()
     print(event)
@@ -28,8 +29,17 @@ while True:
             functions.write_todos("todos.txt", todos)
             window['items'].update(values=todos)
 
+        case "Complete":
+            comp = value['items'][0]
+            todos = functions.get_todos()
+            todos.remove(comp)
+            functions.write_todos("todos.txt", todos)
+            window['items'].update(values=todos)
+            window['todo'].update(values="")
+
         case "items":
             window['todo'].update(value=value['items'][0])
+
         case sg.WINDOW_CLOSED:
             break
 
